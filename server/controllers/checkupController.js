@@ -2,15 +2,10 @@ const checkupRouter = require('express').Router()
 const db = require('../models')
 const { CheckUpDetail } = db
 
-checkupRouter.get('/', async (req, res, next) => {
-	const checkUps = await CheckUpDetail.findAll({
-		where: { visitation_id: 1 },
+checkupRouter.get('/:visitId', async (req, res, next) => {
+	const checkUp = await CheckUpDetail.findOne({
+		where: { visitation_id: req.params.visitId },
 	})
-	res.json(checkUps)
-})
-
-checkupRouter.get('/:id', async (req, res, next) => {
-	const checkUp = await CheckUpDetail.findByPk(req.params.id)
 	if (!checkUp) {
 		res.status(404).json({ error: 'Not found' }).end()
 	} else {
@@ -23,7 +18,7 @@ checkupRouter.post('/', async (req, res, next) => {
 	const checkUp = await CheckUpDetail.create({
 		...newCheckUp,
 	})
-	res.status(401).json(checkUp)
+	res.status(201).json(checkUp)
 })
 
 module.exports = checkupRouter

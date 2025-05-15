@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const crypto = require('crypto')
 
 const hashPassword = async password => {
 	const saltRounds = 10
@@ -7,4 +8,7 @@ const hashPassword = async password => {
 	return hashedPassword
 }
 
-module.exports = { hashPassword }
+const generateTempPassword = (length = 12) => {
+	return crypto.randomBytes(length).toString('base64').slice(0, length)
+}
+module.exports = { hashPassword, generateTempPassword }

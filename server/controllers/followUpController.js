@@ -2,19 +2,14 @@ const followUpRouter = require('express').Router()
 const db = require('../models')
 const { FollowUpDetail } = db
 
-followUpRouter.get('/', async (req, res, next) => {
-	const followUps = await FollowUpDetail.findAll({
-		where: { visitation_id: 1 },
+followUpRouter.get('/:visitId', async (req, res, next) => {
+	const followUp = await FollowUpDetail.findOne({
+		where: { visitation_id: req.params.visitId },
 	})
-	res.json(followUps)
-})
-
-followUpRouter.get('/:id', async (req, res, next) => {
-	const follwUp = await FollowUpDetail.findByPk(req.params.id)
-	if (!follwUp) {
+	if (!followUp) {
 		res.status(404).json({ error: 'Not found' }).end()
 	} else {
-		res.json(follwUp)
+		res.json(followUp)
 	}
 })
 

@@ -5,23 +5,8 @@ module.exports = (sequelize, DataTypes) => {
 			primaryKey: true,
 			autoIncrement: true,
 		},
-		visual_acuity_right: {
-			type: DataTypes.STRING, // Or appropriate data type
-		},
-		visual_acuity_left: {
-			type: DataTypes.STRING, // Or appropriate data type
-		},
-		refractive_error_right: {
-			type: DataTypes.STRING, // Or appropriate data type
-		},
-		refractive_error_left: {
-			type: DataTypes.STRING, // Or appropriate data type
-		},
-		intraocular_pressure: {
-			type: DataTypes.STRING, // Or appropriate data type
-		},
-		other_findings: {
-			type: DataTypes.TEXT,
+		check_up: {
+			type: DataTypes.JSON,
 		},
 	})
 
@@ -32,9 +17,6 @@ module.exports = (sequelize, DataTypes) => {
 		})
 		CheckUpDetail.belongsTo(models.User, {
 			foreignKey: { name: 'user_id', allowNull: false },
-		})
-		CheckUpDetail.hasOne(models.Prescription, {
-			foreignKey: { name: 'check_up_id', allowNull: false },
 		})
 	}
 

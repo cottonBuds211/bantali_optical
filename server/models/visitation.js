@@ -13,27 +13,27 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.TIME,
 			allowNull: false,
 		},
-		visitation_type: {
-			type: DataTypes.ENUM('follow-up', 'check-up', 'other'),
-			allowNull: false,
+		visit_data: {
+			type: DataTypes.JSON,
 		},
 	})
 
 	Visitation.associate = models => {
 		Visitation.belongsTo(models.Patient, {
 			foreignKey: { name: 'patient_id', allowNull: false },
+			onDelete: 'CASCADE',
 		})
 
 		Visitation.belongsTo(models.User, {
 			foreignKey: { name: 'user_id', allowNull: false },
 		})
 
-		Visitation.hasOne(models.FollowUpDetail, {
-			foreignKey: { name: 'visitation_id', allowNull: false },
-		})
-
-		Visitation.hasOne(models.CheckUpDetail, {
-			foreignKey: { name: 'visitation_id', allowNull: false },
+		Visitation.hasOne(models.Billing, {
+			foreignKey: {
+				name: 'visitation_id',
+				allowNull: false,
+			},
+			onDelete: 'CASCADE',
 		})
 	}
 	return Visitation

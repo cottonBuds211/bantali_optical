@@ -11,9 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-			middle_name: {
-				type: DataTypes.STRING,
-			},
+
 			last_name: {
 				type: DataTypes.STRING,
 				allowNull: false,
@@ -37,6 +35,12 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.TEXT,
 				allowNull: false,
 			},
+			medical_conditions: {
+				type: DataTypes.TEXT,
+			},
+			latest_eye_checkup: {
+				type: DataTypes.JSON,
+			},
 			active: {
 				type: DataTypes.BOOLEAN,
 				allowNull: false,
@@ -46,12 +50,7 @@ module.exports = (sequelize, DataTypes) => {
 			indexes: [
 				{
 					unique: true,
-					fields: [
-						'first_name',
-						'middle_name',
-						'last_name',
-						'date_of_birth',
-					],
+					fields: ['first_name', 'last_name', 'date_of_birth'],
 				},
 			],
 		}
@@ -64,6 +63,16 @@ module.exports = (sequelize, DataTypes) => {
 		})
 		Patient.hasMany(models.Visitation, {
 			foreignKey: { name: 'patient_id', allowNull: false },
+			onDelete: 'CASCADE',
+		})
+
+		Patient.hasMany(models.Sales, {
+			foreignKey: { name: 'patient_id', allowNull: false },
+			onDelete: 'CASCADE',
+		})
+		Patient.hasMany(models.Billing, {
+			foreignKey: { name: 'patient_id', allowNull: false },
+			onDelete: 'CASCADE',
 		})
 	}
 	return Patient

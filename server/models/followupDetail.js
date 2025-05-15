@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
+		doctor_notes: {
+			type: DataTypes.STRING,
+		},
 	})
 
 	//Associations

@@ -1,10 +1,11 @@
 const db = require('./models')
-const app = require('./app')
+const server = require('./app')
 const seedPatients = require('./seeders/seedPatients')
 
 db.sequelize.sync().then(async req => {
 	//await seedPatients(db.sequelize)
-	app.listen('3002', () => {
+	//'192.168.56.1',
+	server.listen('3002', () => {
 		console.log('server running with dummy data')
 	})
 })

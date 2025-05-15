@@ -7,8 +7,7 @@ module.exports = (sequelize, DataTypes) => {
 			autoIncrement: true,
 		},
 		prescription_details: {
-			type: DataTypes.TEXT,
-			allowNull: false,
+			type: DataTypes.JSON,
 		},
 		prescription_date: {
 			type: DataTypes.DATEONLY,
@@ -22,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
 
 	//Associations
 	Prescription.associate = models => {
-		Prescription.belongsTo(models.CheckUpDetail, {
-			foreignKey: { name: 'check_up_id', allowNull: false },
+		Prescription.belongsTo(models.Patient, {
+			foreignKey: { name: 'patient_id', allowNull: false },
 		})
 		Prescription.belongsTo(models.User, {
 			foreignKey: { name: 'user_id', allowNull: false },
