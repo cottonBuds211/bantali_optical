@@ -4,7 +4,7 @@
 -This project used PERN stack (Postgres, Express, React and Node) language used is Javascript
 -It also made use of Sequelize, tailwind and shadcn library
 
-Requirements - PostgreSQL (pgAdmin4) - NodeJS (any version) - Postman
+Requirements - PostgreSQL (pgAdmin4) - NodeJS 
 
 How to run
 
